@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
-public class road_items_movement : MonoBehaviour
+public class RoadItemsMovement : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private float speed;
@@ -14,7 +14,7 @@ public class road_items_movement : MonoBehaviour
     void Update()
     {
         // get car speed from game mahager
-        speed = game_manager.Instance.carSpeed;
+        speed = GameManager.Instance.carSpeed;
 
         // Move object down opposite car speed
         transform.position += Vector3.down * speed * Time.deltaTime;
@@ -29,7 +29,7 @@ public class road_items_movement : MonoBehaviour
         // When below the bottom, reset above
         if (transform.position.y < bottomY)
         {
-            float halfRoad = game_manager.Instance.roadWidth / 2f;
+            float halfRoad = GameManager.Instance.roadWidth / 2f;
             float randomX = Random.Range(-halfRoad, halfRoad);
 
             transform.position = new Vector3(randomX, topY + 1f, transform.position.z); // +1 so it spawns just above view
