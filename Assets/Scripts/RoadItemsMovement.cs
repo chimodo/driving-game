@@ -6,20 +6,16 @@ public class RoadItemsMovement : MonoBehaviour
 
     void Update()
     {
-        // Base car speed from GameManager
         speed = GameManager.Instance.carSpeed;
+        // prevent that bug
+        if (float.IsNaN(speed))
+        {
+            return;
+        }
 
-        // Get the car's current vertical velocity from Rigidbody2D
-        float carVelocityY = GameManager.Instance.carRb.velocity.y;
+        transform.position += Vector3.down * speed * Time.deltaTime;
 
-        // Calculate relative speed for road items
-        float relativeSpeed = speed - carVelocityY;
-        Debug.Log(carVelocityY);
-
-        // Move road item down at relative speed
-        transform.position += Vector3.down * relativeSpeed * Time.deltaTime;
-
-        // Recycle objects when off screen (optional but recommended)
+        // Recycle logic
         float camHeight = Camera.main.orthographicSize;
         float camY = Camera.main.transform.position.y;
         float bottomY = camY - camHeight;

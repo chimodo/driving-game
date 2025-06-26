@@ -6,7 +6,7 @@ public class Pothole : MonoBehaviour
 
     public float slowDuration = 3f;
 
-    public float slowSpeed = 0.5f;
+    public float slowSpeed = 1f;
 
     public float loseProgres = 10f;
 
@@ -20,7 +20,7 @@ public class Pothole : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //other.GetComponent<CarController>().SlowDown(slowDuration, slowSpeed);
-            GameManager.Instance.DecreaseProgress(loseProgres);
+            //GameManager.Instance.DecreaseProgress(loseProgres);
             StartCoroutine(SlowCarDown());
             ScreenShake.Instance.Shake(2f, 0.1f);
             

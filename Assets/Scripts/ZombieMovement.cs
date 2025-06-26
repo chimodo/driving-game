@@ -26,12 +26,36 @@ public class ZombieMovement : MonoBehaviour
         carSpeed = GameManager.Instance.carSpeed;
         zombieSpeed = GameManager.Instance.zombieSpeed;
 
-        relativeSpeed = zombieSpeed - carSpeed;
+        if (float.IsNaN(carSpeed) || float.IsNaN(zombieSpeed))
+        {
+            return;
+        }
+
+        relativeSpeed = -1 * (zombieSpeed - carSpeed);
 
         // moving zombie based on relative speed
         transform.position += Vector3.down * relativeSpeed * Time.deltaTime;
 
-        Debug.Log($"Zombie speed: {zombieSpeed}, CarSpeed: {carSpeed}, RelativeSpeed: {relativeSpeed}");
+        //Debug.Log($"Zombie speed: {zombieSpeed}, CarSpeed: {carSpeed}, RelativeSpeed: {relativeSpeed}");
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Zombie caught the car! Game Over.");
+
+            // Stop car movement
+            GameManager.Instance.carSpeed = 0f;
+            GameManager.Instance.zombieSpeed = 0f;
+           
+            
+
+            // Optional: Disable player input
+            other.GetComponent<CarController>().enabled = false;
+            GameManager.Instance.EndGame(false); // Player won
+        }
+
     }
 
     //public void BoostZombie(float duration, float newSpeed)
