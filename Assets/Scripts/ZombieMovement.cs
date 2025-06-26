@@ -9,22 +9,22 @@ public class ZombieMovement : MonoBehaviour
     private float zombieSpeed;
     private float relativeSpeed; // thanks Einstein 
 
-    private float normalZombieSpeed = 2f;
-    private float boostZompieSpeed = 6f;
-    private float boostDuration = 4f;
+    //private float normalZombieSpeed = 2f;
+    //private float boostZompieSpeed = 6f;
+    //private float boostDuration = 4f;
 
     private bool isBoosted = false;
 
     void Start()
     {
-        zombieSpeed = normalZombieSpeed;
+        //zombieSpeed = normalZombieSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
         carSpeed = GameManager.Instance.carSpeed;
-        // zombieSpeed = GameManager.Instance.zombieSpeed;
+        zombieSpeed = GameManager.Instance.zombieSpeed;
 
         relativeSpeed = zombieSpeed - carSpeed;
 
@@ -34,21 +34,21 @@ public class ZombieMovement : MonoBehaviour
         Debug.Log($"Zombie speed: {zombieSpeed}, CarSpeed: {carSpeed}, RelativeSpeed: {relativeSpeed}");
     }
 
-    public void BoostZombie(float duration, float newSpeed)
-    {
-        if (!isBoosted)
-            StartCoroutine(Boost(duration, newSpeed));
-    }
+    //public void BoostZombie(float duration, float newSpeed)
+    //{
+    //    if (!isBoosted)
+    //        StartCoroutine(Boost(duration, newSpeed));
+    //}
 
-    private System.Collections.IEnumerator Boost(float duration, float newSpeed)
-    {
-        isBoosted = true;
-        zombieSpeed = newSpeed;
+    //private System.Collections.IEnumerator Boost(float duration, float newSpeed)
+    //{
+    //    isBoosted = true;
+    //    zombieSpeed = newSpeed;
 
-        yield return new WaitForSeconds(duration);
+    //    yield return new WaitForSeconds(duration);
 
-        zombieSpeed = normalZombieSpeed;
-        isBoosted = false;
-    }
+    //    zombieSpeed = normalZombieSpeed;
+    //    isBoosted = false;
+    //}
 }
 

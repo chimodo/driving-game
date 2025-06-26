@@ -1,9 +1,10 @@
 using UnityEngine;
+using System.Collections;
 
 public class Pothole : MonoBehaviour
 {
 
-    public float slowDuration = 2f;
+    public float slowDuration = 3f;
 
     public float slowSpeed = 0.5f;
 
@@ -18,9 +19,23 @@ public class Pothole : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<CarController>().SlowDown(slowDuration, slowSpeed);
+            //other.GetComponent<CarController>().SlowDown(slowDuration, slowSpeed);
             GameManager.Instance.DecreaseProgress(loseProgres);
-            ScreenShake.Instance.Shake(1f, 0.5f);
+            StartCoroutine(SlowCarDown());
+            ScreenShake.Instance.Shake(2f, 0.1f);
+            
+            // slow down the car
+            
         }
+    }
+
+    private IEnumerator SlowCarDown()
+    {
+        float originalSpeed = GameManager.Instance.carSpeed;
+        GameManager.Instance.carSpeed = slowSpeed;
+
+        yield return new WaitForSeconds(slowDuration);
+
+        GameManager.Instance.carSpeed = originalSpeed;
     }
 }

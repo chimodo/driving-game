@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public float roadWidth;       // global width value
     public float carSpeed;
     public float zombieSpeed;
+    public Rigidbody2D carRb;
 
     // Progress Bar
     public float progress = 100f;
